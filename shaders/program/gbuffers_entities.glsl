@@ -148,6 +148,19 @@ void main() {
 		float smoothnessG = 0.0, highlightMult = 0.0, emission = 0.0, noiseFactor = 0.75;
 		vec2 lmCoordM = lmCoord;
 		vec3 shadowMult = vec3(1.0);
+		
+		#if defined IPBR_OVERRIDE || !defined IPBR
+			#ifdef CUSTOM_PBR
+				GetCustomMaterials(color, normalM, lmCoordM, NdotU, shadowMult, smoothnessG, smoothnessD, highlightMult, emission, materialMask, viewPos, lViewPos);
+			#endif
+			
+			if (entityId == 50004) { // Lightning Bolt
+				#include "/lib/materials/specificMaterials/entities/lightningBolt.glsl"
+			} else if (entityId == 50008) { // Item Frame, Glow Item Frame
+				noSmoothLighting = true;
+			}
+		#endif
+		
 		#ifdef IPBR
 			#include "/lib/materials/materialHandling/entityMaterials.glsl"
 
@@ -158,16 +171,6 @@ void main() {
 			#ifdef COATED_TEXTURES
 				CoatTextures(color.rgb, noiseFactor, playerPos);
 			#endif
-		#else
-			#ifdef CUSTOM_PBR
-				GetCustomMaterials(color, normalM, lmCoordM, NdotU, shadowMult, smoothnessG, smoothnessD, highlightMult, emission, materialMask, viewPos, lViewPos);
-			#endif
-			
-			if (entityId == 50004) { // Lightning Bolt
-				#include "/lib/materials/specificMaterials/entities/lightningBolt.glsl"
-			} else if (entityId == 50008) { // Item Frame, Glow Item Frame
-				noSmoothLighting = true;
-			}
 		#endif
 
 		normalM = gl_FrontFacing ? normalM : -normalM; // Inverted Normal Workaround

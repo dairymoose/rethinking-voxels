@@ -216,6 +216,11 @@ value.RP_MODE.1=§bIntegrated PBR+
 value.RP_MODE.2=§eSEUSPBR (RP Required)
 value.RP_MODE.3=§elabPBR (RP Required)
 
+option.FORCE_PBR_PLUS=Integrated PBR+
+option.FORCE_PBR_PLUS.comment=Enable PBR+ even when using SEUS/LabPBR
+value.FORCE_PBR_PLUS.0=Off
+value.FORCE_PBR_PLUS.1=On
+
 option.WATER_QUALITY=Water Material Quality
 option.WATER_QUALITY.comment=Adjusts the visual quality of water. §bHigh§r: Enables water refraction. §aMedium§r: Default. §eLow§r: No edge foaming, no fancy alpha, no varying color intensity, and no surface shadows over Medium.
 value.WATER_QUALITY.1=§eLow

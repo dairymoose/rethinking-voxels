@@ -281,9 +281,7 @@ void main() {
 		float smoothnessD = texture5.r;
 		vec3 reflectColor = vec3(1.0);
 
-		#ifdef IPBR
-			#include "/lib/materials/materialHandling/deferredMaterials.glsl"
-		#else
+		#if defined IPBR_OVERRIDE || !defined IPBR
 			if (materialMaskInt <= 240) {
 				#ifdef CUSTOM_PBR
 					#if RP_MODE == 2 // SEUSPBR
@@ -303,6 +301,10 @@ void main() {
 				if (materialMaskInt == 254) // No SSAO, No TAA
 					ssao = 1.0;
 			}
+		#endif
+		
+		#ifdef IPBR
+			#include "/lib/materials/materialHandling/deferredMaterials.glsl"
 		#endif
 		
 		color.rgb *= ssao;

@@ -55,7 +55,9 @@
 
     #define SHADER_STYLE 1 //[1 4]
 
-    #define RP_MODE 1 //[0 1 2 3]
+    #define FORCE_PBR_PLUS 1 //[1 0]
+
+    #define RP_MODE 0 //[0 2 3]
     #if RP_MODE == 1
         #define IPBR
         //#define GENERATED_NORMALS
@@ -64,6 +66,12 @@
     #if RP_MODE >= 2
         #define CUSTOM_PBR
         #define POM
+    #endif
+    #if FORCE_PBR_PLUS == 1
+        #define IPBR
+        #define IPBR_OVERRIDE
+        //#define GENERATED_NORMALS
+        //#define COATED_TEXTURES
     #endif
 
     #define REALTIME_SHADOWS
